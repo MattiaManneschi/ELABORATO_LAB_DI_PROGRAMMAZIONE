@@ -13,7 +13,6 @@ using namespace std;
 struct articolo {
     string objectName;
     int qty;
-
     bool operator==(const articolo &c) const {
         return this->objectName == c.objectName;
     }
@@ -23,6 +22,7 @@ class ShoppingList {
 protected:
     string listName;
     list<articolo> shoppingList;
+    bool shareable = false;
 public:
     const string &getListName() const;
 
@@ -48,6 +48,24 @@ public:
             }
         }
     }
+
+    bool isShareable() const;
+
+    void setShareable() {
+        this->shareable = true;
+    }
+
+    int checkName(string &objectName) {
+        auto it = shoppingList.begin();
+        while (it != shoppingList.end()) {
+            if (it->objectName == objectName) {
+                cout << "\nOggetto trovato!";
+                return it->qty;
+            }
+        }
+        return 0;
+    }
+
 
 };
 

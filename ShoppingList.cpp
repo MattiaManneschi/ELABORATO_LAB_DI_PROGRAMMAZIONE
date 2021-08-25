@@ -11,3 +11,7 @@ const string &ShoppingList::getListName() const {
 void ShoppingList::setListName(const string &listName) {
     ShoppingList::listName = listName;
 }
+
+bool ShoppingList::isShareable() const {
+    return shareable;
+}

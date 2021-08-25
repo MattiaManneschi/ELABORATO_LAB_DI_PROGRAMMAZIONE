@@ -46,6 +46,29 @@ public:
             }
         }
     }
+
+    int getQuantity(string &listName, string &objectName) {
+        auto it = shoppingLists.begin();
+        while (it != shoppingLists.end()) {
+            if (it->getListName() == listName) {
+                return it->checkName(objectName);
+            }
+        }
+        return 0;
+    }
+
+    void addSharedList(const User &u) {
+        auto it = u.shoppingLists.begin();
+        while (it != u.shoppingLists.end()) {
+            if (it->isShareable()) {
+                shoppingLists.push_back(*it);
+            } else {
+                ++it;
+            }
+        }
+    }
+
+
 };
 
 
