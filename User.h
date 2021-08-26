@@ -6,11 +6,13 @@
 #define ELABORATO_LAB_DI_PROGRAMMAZIONE_USER_H
 
 #include "ShoppingList.h"
+#include "Observer.h"
 
-class User {
+class User : public Observer {
 protected:
     string name, emailAddress, password;
     list<ShoppingList> shoppingLists;
+    int listNum = 0;
 public:
     const string &getName() const;
 
@@ -31,6 +33,7 @@ public:
                 ++it;
                 if (it == shoppingLists.end()) {
                     shoppingLists.push_back(s);
+                    listNum++;
                 }
             }
         }
@@ -41,6 +44,7 @@ public:
         while (it != shoppingLists.end()) {
             if (it->getListName() == s.getListName()) {
                 shoppingLists.erase(it++);
+                listNum--;
             } else {
                 ++it;
             }
@@ -68,6 +72,13 @@ public:
         }
     }
 
+    void update(string listName, string objectName, bool oS) override {
+        if (oS) {
+            cout << "L'ARTICOLO " << objectName << " È STATO AGGIUNTO ALLA LISTA " << listName;
+        } else {
+            cout << "L'ARTICOLO " << objectName << " È STATO RIMOSSO DALLA LISTA " << listName;
+        }
+    }
 
 };
 

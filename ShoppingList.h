@@ -5,10 +5,8 @@
 #ifndef ELABORATO_LAB_DI_PROGRAMMAZIONE_SHOPPINGLIST_H
 #define ELABORATO_LAB_DI_PROGRAMMAZIONE_SHOPPINGLIST_H
 
-#include <iostream>
 #include <list>
-
-using namespace std;
+#include "Subject.h"
 
 struct articolo {
     string objectName;
@@ -18,11 +16,14 @@ struct articolo {
     }
 };
 
-class ShoppingList {
+class ShoppingList : public Subject {
 protected:
     string listName;
     list<articolo> shoppingList;
     bool shareable = false;
+    int objNum = 0;
+    bool objectStatus = false;
+    list<Observer *> observers;
 public:
     const string &getListName() const;
 
@@ -35,6 +36,9 @@ public:
                 exit(0);
             }
             shoppingList.push_back(c);
+            objNum++;
+            objectStatus = true;
+            notifyObserver(this->getListName(), c.objectName);
         }
     }
 
@@ -43,6 +47,9 @@ public:
         while (it != shoppingList.end()) {
             if (it->objectName == c.objectName) {
                 shoppingList.erase(it++);
+                objNum--;
+                objectStatus = false;
+                notifyObserver(this->getListName(), c.objectName);
             } else {
                 ++it;
             }
@@ -66,6 +73,24 @@ public:
         return 0;
     }
 
+    void registerObserver(Observer *o) override {
+        observers.push_back(o);
+    }
+
+    void removeObserver(Observer *o) override {
+        observers.remove(o);
+    }
+
+    void notifyObserver(string name, string objectName) override {
+        auto it = observers.begin();
+        while (it != observers.end()) {
+            (*it)->update(name, objectName, this->objectStatus);
+        }
+    }
+
+    int getNumOfObjects() const {
+        return objNum;
+    }
 
 };
 
