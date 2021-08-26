@@ -9,11 +9,20 @@
 
 using namespace std;
 
+struct articolo {
+    string objectName;
+    int qty;
+
+    bool operator==(const articolo &c) const {
+        return this->objectName == c.objectName;
+    }
+};
+
 class Observer {
 public:
-    virtual void update(string listName, string objectName, bool oS) = 0;
+    virtual void update(string &name, bool oS, int a) = 0;
 
-    virtual ~Observer() = 0;
+    virtual ~Observer() = default;
 };
 
 

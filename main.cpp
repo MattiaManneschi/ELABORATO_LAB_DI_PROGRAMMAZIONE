@@ -1,6 +1,18 @@
-#include <iostream>
+#include "View.h"
+#include "Controller.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+
+    User user;
+    user.setUserName("MATTIA");
+
+    Controller controller(&user);
+
+    View view(&controller, &user);
+
+    view.addNewListButton();
+    view.addNewObjectButton();
+    view.addNewObjectButton();
+
     return 0;
 }

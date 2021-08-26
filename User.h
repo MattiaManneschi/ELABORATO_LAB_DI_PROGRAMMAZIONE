@@ -6,43 +6,30 @@
 #define ELABORATO_LAB_DI_PROGRAMMAZIONE_USER_H
 
 #include "ShoppingList.h"
-#include "Observer.h"
+#include "Subject.h"
 
-class User : public Observer {
+class User : public Subject {
 protected:
-    string name, emailAddress, password;
+    string userName;
     list<ShoppingList> shoppingLists;
     int listNum = 0;
+    list<Observer *> observers;
+    int objNum = 0;
+    bool objectStatus = false;
+
 public:
-    const string &getName() const;
+    const string &getUserName() const;
 
-    void setName(const string &name);
-
-    const string &getEmailAddress() const;
-
-    void setEmailAddress(const string &emailAddress);
-
-    const string &getPassword() const;
-
-    void setPassword(const string &password);
+    void setUserName(const string &userName);
 
     void addList(const ShoppingList &s) {
-        auto it = shoppingLists.begin();
-        while (it != shoppingLists.end()) {
-            if (it->getListName() == s.getListName()) {
-                ++it;
-                if (it == shoppingLists.end()) {
-                    shoppingLists.push_back(s);
-                    listNum++;
-                }
-            }
-        }
+        shoppingLists.push_back(s);
     }
 
-    void removeList(const ShoppingList &s) {
+    void removeList(string &listName) {
         auto it = shoppingLists.begin();
         while (it != shoppingLists.end()) {
-            if (it->getListName() == s.getListName()) {
+            if (it->getListName() == listName) {
                 shoppingLists.erase(it++);
                 listNum--;
             } else {
@@ -61,6 +48,36 @@ public:
         return 0;
     }
 
+    void searchListAdd(string &listName, const articolo &a) {
+        auto it = shoppingLists.begin();
+        while (it != shoppingLists.end()) {
+            if (it->getListName() == listName) {
+                cout << "LISTA TROVATA\n";
+                goto label1;
+            } else {
+                ++it;
+            }
+        }
+        label1:
+        objNum = it->addObject(a);
+        objectStatus = true;
+        notify(a.objectName);
+    }
+
+    void searchListRemove(string &listName, string &objectName) {
+        auto it = shoppingLists.begin();
+        while (it != shoppingLists.end()) {
+            if (it->getListName() == listName) {
+                objNum = it->removeObject(objectName);
+                notify(objectName);
+                objectStatus = false;
+            } else {
+                ++it;
+            }
+        }
+    }
+
+
     void addSharedList(const User &u) {
         auto it = u.shoppingLists.begin();
         while (it != u.shoppingLists.end()) {
@@ -72,13 +89,20 @@ public:
         }
     }
 
-    void update(string listName, string objectName, bool oS) override {
-        if (oS) {
-            cout << "L'ARTICOLO " << objectName << " È STATO AGGIUNTO ALLA LISTA " << listName;
-        } else {
-            cout << "L'ARTICOLO " << objectName << " È STATO RIMOSSO DALLA LISTA " << listName;
+    void registerObserver(Observer *o) override {
+        observers.push_back(o);
+    }
+
+    void removeObserver(Observer *o) override {
+        observers.remove(o);
+    }
+
+    void notify(string name) override {
+        for (auto &ell: observers) {
+            ell->update(name, objectStatus, objNum);
         }
     }
+
 
 };
 

@@ -16,9 +16,9 @@ public:
 
     virtual void removeObserver(Observer *o) = 0;
 
-    virtual void notifyObserver(string a, string b) = 0;
+    virtual void notify(string name) = 0;
 
-    virtual ~Subject() = 0;
+    virtual ~Subject() = default;
 };
 
 
