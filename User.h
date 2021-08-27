@@ -57,6 +57,8 @@ public:
             } else {
                 ++it;
             }
+            cout << "LISTA NON TROVATA!";
+            exit(0);
         }
         label1:
         objNum = it->addObject(a);
@@ -68,15 +70,16 @@ public:
         auto it = shoppingLists.begin();
         while (it != shoppingLists.end()) {
             if (it->getListName() == listName) {
-                objNum = it->removeObject(objectName);
-                notify(objectName);
-                objectStatus = false;
+                goto label1;
             } else {
                 ++it;
             }
         }
+        label1:
+        objNum = it->removeObject(objectName);
+        objectStatus = false;
+        notify(objectName);
     }
-
 
     void addSharedList(const User &u) {
         auto it = u.shoppingLists.begin();

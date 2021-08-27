@@ -33,7 +33,7 @@ public:
         string answer, answer1;
         cout << "INSERIRE NOME LISTA ORIGINE: ";
         cin >> answer1;
-        cout << "INSERIRE NOME NUOVO ARTICOLO: ";
+        cout << "INSERIRE NOME ARTICOLO DA RIMUOVERE: ";
         cin >> answer;
         controller->removeOldArticle(answer1, answer);
     }
@@ -70,6 +70,10 @@ public:
 
     void removeOldObjectButton() {
         deleteOldArticle();
+    }
+
+    ~View() override {
+        controller->user->removeObserver(this);
     }
 
 protected:
