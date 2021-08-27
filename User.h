@@ -57,8 +57,7 @@ public:
             } else {
                 ++it;
             }
-            cout << "LISTA NON TROVATA!";
-            exit(0);
+            throw invalid_argument("LISTA NON TROVATA!");
         }
         label1:
         objNum = it->addObject(a);
@@ -74,6 +73,7 @@ public:
             } else {
                 ++it;
             }
+            throw invalid_argument("LISTA NON TROVATA");
         }
         label1:
         objNum = it->removeObject(objectName);

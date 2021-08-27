@@ -8,6 +8,7 @@
 #include "Observer.h"
 #include "Controller.h"
 #include "User.h"
+#include <unistd.h>
 
 class View : public Observer {
 
@@ -17,24 +18,11 @@ public:
         controller->user->registerObserver(this);
     };
 
-    void createNewArticle() {
-        string answer, answer1;
-        cout << "INSERIRE NOME LISTA DESTINAZIONE: ";
-        cin >> answer1;
-        cout << "INSERIRE NOME NUOVO ARTICOLO: ";
-        cin >> answer;
-        cout << "INSERIRE QUANTITÀ NUOVO ARTICOLO: ";
-        int qty;
-        cin >> qty;
+    void createNewArticle(string answer1, string answer, int qty) {
         controller->createArticle(answer, qty, answer1);
     }
 
-    void deleteOldArticle() {
-        string answer, answer1;
-        cout << "INSERIRE NOME LISTA ORIGINE: ";
-        cin >> answer1;
-        cout << "INSERIRE NOME ARTICOLO DA RIMUOVERE: ";
-        cin >> answer;
+    void deleteOldArticle(string answer1, string answer) {
         controller->removeOldArticle(answer1, answer);
     }
 
@@ -65,11 +53,32 @@ public:
 
 
     void addNewObjectButton() {
-        this->createNewArticle();
+        string answer, answer1;
+        cout << "INSERIRE NOME LISTA DESTINAZIONE: ";
+        cin >> answer1;
+        cout << "INSERIRE NOME NUOVO ARTICOLO: ";
+        cin >> answer;
+        cout << "INSERIRE QUANTITÀ NUOVO ARTICOLO: ";
+        int qty;
+        cin >> qty;
+        try {
+            this->createNewArticle(answer1, answer, qty);
+        }
+        catch (invalid_argument &e) {
+            cerr << e.what() << endl;
+        }
     }
 
     void removeOldObjectButton() {
-        deleteOldArticle();
+        string answer, answer1;
+        cout << "INSERIRE NOME LISTA ORIGINE: ";
+        cin >> answer1;
+        cout << "INSERIRE NOME ARTICOLO DA RIMUOVERE: ";
+        cin >> answer;
+        try { this->deleteOldArticle(answer1, answer); }
+        catch (invalid_argument &e) {
+            cerr << e.what() << endl;
+        }
     }
 
     ~View() override {

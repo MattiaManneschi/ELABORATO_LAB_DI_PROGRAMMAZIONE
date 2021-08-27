@@ -41,6 +41,7 @@ public:
             } else {
                 ++it;
             }
+            throw invalid_argument("OGGETTO NON TROVATO");
         }
         return objNum;
     }

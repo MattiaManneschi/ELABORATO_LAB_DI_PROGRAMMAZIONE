@@ -21,7 +21,7 @@ public:
     }
 
     void addNewArticle(const articolo &a, string &c) const {
-        user->searchListAdd(c, a);
+       user->searchListAdd(c, a);
     }
 
     void removeOldArticle(string &listName, string &articleName) const {
