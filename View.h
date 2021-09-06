@@ -29,7 +29,7 @@ public:
 
     void update(string &name, bool oS, int a) override {
         if (oS) {
-            cout << "L'ARTICOLO " << name << " È STATO AGGIUNTO CORRETTAMENTE. ";
+            cout << "\nL'ARTICOLO " << name << " È STATO AGGIUNTO CORRETTAMENTE. ";
         } else {
             cout << "\nL'ARTICOLO " << name << " È STATO RIMOSSO CORRETTAMENTE.";
         }
@@ -39,14 +39,14 @@ public:
 
     void addNewListButton() {
         string answer;
-        cout << "DIGITARE NOME NUOVA LISTA: ";
+        cout << "\nDIGITARE NOME NUOVA LISTA: ";
         cin >> answer;
         controller->createNewList(answer);
     }
 
     void removeListButton() {
         string answer;
-        cout << "DIGITARE NOME LISTA DA RIMUOVERE: ";
+        cout << "\nDIGITARE NOME LISTA DA RIMUOVERE: ";
         cin >> answer;
         controller->removeList(answer);
     }
@@ -54,7 +54,7 @@ public:
 
     void addNewObjectButton() {
         string answer, answer1;
-        cout << "INSERIRE NOME LISTA DESTINAZIONE: ";
+        cout << "\nINSERIRE NOME LISTA DESTINAZIONE: ";
         cin >> answer1;
         cout << "INSERIRE NOME NUOVO ARTICOLO: ";
         cin >> answer;
@@ -71,7 +71,7 @@ public:
 
     void removeOldObjectButton() {
         string answer, answer1;
-        cout << "INSERIRE NOME LISTA ORIGINE: ";
+        cout << "\nINSERIRE NOME LISTA ORIGINE: ";
         cin >> answer1;
         cout << "INSERIRE NOME ARTICOLO DA RIMUOVERE: ";
         cin >> answer;

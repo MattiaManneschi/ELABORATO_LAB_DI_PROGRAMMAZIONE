@@ -24,7 +24,7 @@ public:
         for (auto &it: shoppingList) {
             if (it.objectName == c.objectName) {
                 it.qty = it.qty + c.qty;
-                exit(0);
+                return objNum;
             }
         }
         shoppingList.push_back(c);
@@ -32,18 +32,27 @@ public:
         return objNum;
     }
 
-    int removeObject(string objectName) {
-        auto it = shoppingList.begin();
-        while (it != shoppingList.end()) {
-            if (it->objectName == objectName) {
-                shoppingList.erase(it++);
-                objNum--;
-            } else {
-                ++it;
+    int removeObject(string &objectName) {
+        if (shoppingList.empty()) {
+            throw invalid_argument("LISTA VUOTA");
+        } else {
+            auto it = shoppingList.begin();
+            while (it != shoppingList.end()) {
+                if (it == shoppingList.end()) {
+                    throw invalid_argument("OGGETTO NON TROVATO");
+                } else {
+                    if (it->objectName == objectName) {
+                        shoppingList.erase(it);
+                        objNum--;
+                        return objNum;
+                    } else {
+                        it++;
+                    }
+                }
             }
             throw invalid_argument("OGGETTO NON TROVATO");
+            return 0;
         }
-        return objNum;
     }
 
     bool isShareable() const;
@@ -56,7 +65,7 @@ public:
         auto it = shoppingList.begin();
         while (it != shoppingList.end()) {
             if (it->objectName == objectName) {
-                cout << "\nOggetto trovato!";
+                cout << "\nOGGETTO TROVATO!";
                 return it->qty;
             }
         }
