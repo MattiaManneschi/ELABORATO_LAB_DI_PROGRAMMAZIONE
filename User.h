@@ -11,13 +11,16 @@
 class User : public Subject {
 protected:
     string userName;
-    list<ShoppingList> shoppingLists;
-    int listNum = 0;
+    list <ShoppingList> shoppingLists;
+    int listNum;
     list<Observer *> observers;
-    int objNum = 0;
+    int objNum;
     bool objectStatus = false;
 
 public:
+
+    explicit User(int lN = 0, int oN = 0) : listNum(lN), objNum(oN) {};
+
     const string &getUserName() const;
 
     void setUserName(const string &userName);
@@ -106,6 +109,11 @@ public:
         }
     }
 
+    int getListNum() const;
+
+    int getObjNum() const;
+
+    bool isObjectStatus() const;
 
 };
 

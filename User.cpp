@@ -11,3 +11,15 @@ const string &User::getUserName() const {
 void User::setUserName(const string &userName) {
     User::userName = userName;
 }
+
+int User::getListNum() const {
+    return listNum;
+}
+
+int User::getObjNum() const {
+    return objNum;
+}
+
+bool User::isObjectStatus() const {
+    return objectStatus;
+}

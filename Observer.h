@@ -12,7 +12,6 @@ using namespace std;
 struct articolo {
     string objectName;
     int qty;
-
     bool operator==(const articolo &c) const {
         return this->objectName == c.objectName;
     }

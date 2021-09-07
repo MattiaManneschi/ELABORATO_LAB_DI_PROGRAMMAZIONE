@@ -11,11 +11,14 @@
 class ShoppingList {
 protected:
     string listName;
-    list<articolo> shoppingList;
-    bool shareable = false;
-    int objNum = 0;
+    list <articolo> shoppingList;
+    bool shareable;
+    int objNum;
 
 public:
+
+    explicit ShoppingList(bool s = false, int obN = 0) : shareable(s), objNum(obN) {};
+
     const string &getListName() const;
 
     void setListName(const string &listName);
@@ -51,7 +54,6 @@ public:
                 }
             }
             throw invalid_argument("OGGETTO NON TROVATO");
-            return 0;
         }
     }
 
@@ -75,6 +77,7 @@ public:
     int getNumOfObjects() const {
         return objNum;
     }
+
 
 };
 

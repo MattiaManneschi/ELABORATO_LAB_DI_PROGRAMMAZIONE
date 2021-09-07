@@ -8,7 +8,6 @@
 #include "Observer.h"
 #include "Controller.h"
 #include "User.h"
-#include <unistd.h>
 
 class View : public Observer {
 
@@ -16,6 +15,7 @@ public:
 
     explicit View(Controller *c, User *u) : controller(c), user(u) {
         controller->user->registerObserver(this);
+        this->userAdded = true;
     };
 
     void createNewArticle(string answer1, string answer, int qty) {
@@ -85,9 +85,16 @@ public:
         controller->user->removeObserver(this);
     }
 
+
+    bool isUserAdded() const {
+        return userAdded;
+    }
+
+
 protected:
     Controller *controller;
     User *user;
+    bool userAdded = false;
 };
 
 
