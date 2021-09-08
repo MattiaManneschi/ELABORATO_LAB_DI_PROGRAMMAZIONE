@@ -90,6 +90,25 @@ public:
         return false;
     }
 
+    bool searchToDeselect(string &objectName) {
+        auto it = shoppingList.begin();
+        while (it != shoppingList.end()) {
+            if (it->objectName == objectName) {
+                if (it->bought) {
+                    it->bought = false;
+                    numToBuy++;
+                    return true;
+                } else {
+                    cout << "OGGETTO GIÀ NON ACQUISTATO. ";
+                    return false;
+                }
+            } else {
+                it++;
+            }
+        }
+        return false;
+    }
+
     unsigned long getNumToBuy() const;
 
 

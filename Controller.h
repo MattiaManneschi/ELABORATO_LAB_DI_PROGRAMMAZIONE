@@ -42,6 +42,9 @@ public:
         int foo = user->buySomething(objectName, listName);
     }
 
+    void deselectObjectToBuy(string &objectName, string &listName) const {
+        int foo = user->deselectPurchase(objectName, listName);
+    }
 
     User *user;
 };

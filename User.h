@@ -133,6 +133,23 @@ public:
         return 1;
     }
 
+    int deselectPurchase(string &objectName, string &listName) {
+        auto it = shoppingLists.begin();
+        while (it != shoppingLists.end()) {
+            if (it->getListName() == listName) {
+                if (it->searchToDeselect(objectName)) {
+                    cout << "FATTO. OGGETTO ANCORA NON ACQUISTATO. \n";
+                    return 0;
+                } else {
+                    throw invalid_argument("OGGETTO NON TROVATO");
+                }
+            } else {
+                throw invalid_argument("LISTA NON TROVATA");
+            }
+        }
+        return 1;
+    }
+
 
     int getListNum() const;
 

@@ -111,6 +111,18 @@ public:
         }
     }
 
+    void untickPurchaseButton() {
+        string answer, answer1;
+        cout << "DIGITARE NOME LISTA: ";
+        cin >> answer1;
+        cout << "DIGITARE NOME OGGETTO: ";
+        cin >> answer;
+        try { controller->deselectObjectToBuy(answer, answer1); }
+        catch (invalid_argument &e) {
+            cerr << e.what() << endl;
+        }
+    }
+
 
 protected:
     Controller *controller;
