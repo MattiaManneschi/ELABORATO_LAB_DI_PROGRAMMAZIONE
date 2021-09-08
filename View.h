@@ -27,14 +27,24 @@ public:
     }
 
 
-    void update(string &name, bool oS, int a) override {
-        if (oS) {
-            cout << "\nL'ARTICOLO " << name << " È STATO AGGIUNTO CORRETTAMENTE. ";
+    void update(string &name, bool oS, int a, bool lS, int x) override {
+        if (x == 1) {
+            if (lS) {
+                cout << "\nLA LISTA " << name << " È STATA AGGIUNTA CORRETTAMENTE. \n";
+            } else {
+                cout << "\nLA LISTA " << name << " È STATA RIMOSSA CORRETTAMENTE. \n";
+            }
         } else {
-            cout << "\nL'ARTICOLO " << name << " È STATO RIMOSSO CORRETTAMENTE.";
+            if (oS) {
+                cout << "\nL'ARTICOLO " << name << " È STATO AGGIUNTO CORRETTAMENTE. \n";
+                goto label1;
+            } else {
+                cout << "\nL'ARTICOLO " << name << " È STATO RIMOSSO CORRETTAMENTE. \n";
+                goto label1;
+            }
+            label1:
+            cout << "\nIL NUMERO TOTALE DI ARTICOLI DELLA LISTA SELEZIONATA È: " << a << endl;
         }
-        label1:
-        cout << "\nIL NUMERO TOTALE DI ARTICOLI DELLA LISTA SELEZIONATA È: " << a << endl;
     }
 
     void addNewListButton() {
@@ -50,7 +60,6 @@ public:
         cin >> answer;
         controller->removeList(answer);
     }
-
 
     void addNewObjectButton() {
         string answer, answer1;
@@ -88,6 +97,18 @@ public:
 
     bool isUserAdded() const {
         return userAdded;
+    }
+
+    void purchaseButton() {
+        string answer, answer1;
+        cout << "DIGITARE NOME LISTA: ";
+        cin >> answer1;
+        cout << "DIGITARE NOME OGGETTO: ";
+        cin >> answer;
+        try { controller->buyAnObject(answer, answer1); }
+        catch (invalid_argument &e) {
+            cerr << e.what() << endl;
+        }
     }
 
 

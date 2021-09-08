@@ -15,3 +15,7 @@ void ShoppingList::setListName(const string &listName) {
 bool ShoppingList::isShareable() const {
     return shareable;
 }
+
+unsigned long ShoppingList::getNumToBuy() const {
+    return numToBuy;
+}

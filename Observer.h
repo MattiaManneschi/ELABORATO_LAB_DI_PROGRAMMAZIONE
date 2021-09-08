@@ -15,11 +15,12 @@ struct articolo {
     bool operator==(const articolo &c) const {
         return this->objectName == c.objectName;
     }
+    bool bought = false;
 };
 
 class Observer {
 public:
-    virtual void update(string &name, bool oS, int a) = 0;
+    virtual void update(string &name, bool oS, int a, bool lS, int x) = 0;
 
     virtual ~Observer() = default;
 };

@@ -13,7 +13,7 @@ void User::setUserName(const string &userName) {
 }
 
 int User::getListNum() const {
-    return listNum;
+    return shoppingLists.size();
 }
 
 int User::getObjNum() const {
@@ -22,4 +22,8 @@ int User::getObjNum() const {
 
 bool User::isObjectStatus() const {
     return objectStatus;
+}
+
+bool User::isListStatus() const {
+    return listStatus;
 }

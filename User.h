@@ -12,14 +12,14 @@ class User : public Subject {
 protected:
     string userName;
     list <ShoppingList> shoppingLists;
-    int listNum;
     list<Observer *> observers;
-    int objNum;
+    int objNum, x;
     bool objectStatus = false;
+    bool listStatus = false;
 
 public:
 
-    explicit User(int lN = 0, int oN = 0) : listNum(lN), objNum(oN) {};
+    explicit User(int oN = 0) : objNum(oN) {};
 
     const string &getUserName() const;
 
@@ -27,6 +27,9 @@ public:
 
     void addList(const ShoppingList &s) {
         shoppingLists.push_back(s);
+        this->x = 1;
+        listStatus = true;
+        notify(s.getListName());
     }
 
     void removeList(string &listName) {
@@ -34,7 +37,9 @@ public:
         while (it != shoppingLists.end()) {
             if (it->getListName() == listName) {
                 shoppingLists.erase(it++);
-                listNum--;
+                this->x = 1;
+                listStatus = false;
+                notify(listName);
             } else {
                 ++it;
             }
@@ -65,6 +70,7 @@ public:
         label1:
         objNum = it->addObject(a);
         objectStatus = true;
+        this->x = 0;
         notify(a.objectName);
     }
 
@@ -81,6 +87,7 @@ public:
         label1:
         objNum = it->removeObject(objectName);
         objectStatus = false;
+        this->x = 0;
         notify(objectName);
     }
 
@@ -105,15 +112,35 @@ public:
 
     void notify(string name) override {
         for (auto &ell: observers) {
-            ell->update(name, objectStatus, objNum);
+            ell->update(name, objectStatus, objNum, listStatus, this->x);
         }
     }
+
+    int buySomething(string &objectName, string &listName) {
+        auto it = shoppingLists.begin();
+        while (it != shoppingLists.end()) {
+            if (it->getListName() == listName) {
+                if (it->searchToPurchase(objectName)) {
+                    cout << "OGGETTO ACQUISTATO. \n";
+                    return 0;
+                } else {
+                    throw invalid_argument("OGGETTO NON TROVATO");
+                }
+            } else {
+                throw invalid_argument("LISTA NON TROVATA");
+            }
+        }
+        return 1;
+    }
+
 
     int getListNum() const;
 
     int getObjNum() const;
 
     bool isObjectStatus() const;
+
+    bool isListStatus() const;
 
 };
 

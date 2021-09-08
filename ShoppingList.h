@@ -13,11 +13,11 @@ protected:
     string listName;
     list <articolo> shoppingList;
     bool shareable;
-    int objNum;
+    unsigned long int numToBuy = shoppingList.size();
 
 public:
 
-    explicit ShoppingList(bool s = false, int obN = 0) : shareable(s), objNum(obN) {};
+    explicit ShoppingList(bool s = false) : shareable(s) {};
 
     const string &getListName() const;
 
@@ -27,12 +27,11 @@ public:
         for (auto &it: shoppingList) {
             if (it.objectName == c.objectName) {
                 it.qty = it.qty + c.qty;
-                return objNum;
+                return shoppingList.size();
             }
         }
         shoppingList.push_back(c);
-        objNum++;
-        return objNum;
+        return shoppingList.size();
     }
 
     int removeObject(string &objectName) {
@@ -46,8 +45,7 @@ public:
                 } else {
                     if (it->objectName == objectName) {
                         shoppingList.erase(it);
-                        objNum--;
-                        return objNum;
+                        return shoppingList.size();
                     } else {
                         it++;
                     }
@@ -75,8 +73,24 @@ public:
     }
 
     int getNumOfObjects() const {
-        return objNum;
+        return shoppingList.size();
     }
+
+    bool searchToPurchase(string &objectName) {
+        auto it = shoppingList.begin();
+        while (it != shoppingList.end()) {
+            if (it->objectName == objectName) {
+                it->bought = true;
+                numToBuy--;
+                return true;
+            } else {
+                it++;
+            }
+        }
+        return false;
+    }
+
+    unsigned long getNumToBuy() const;
 
 
 };

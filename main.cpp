@@ -14,6 +14,9 @@ int main() {
     view.addNewObjectButton();
     view.addNewObjectButton();
 
+    view.purchaseButton();
+    view.purchaseButton();
+
     view.removeOldObjectButton();
     view.removeOldObjectButton();
     view.removeListButton();

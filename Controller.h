@@ -38,6 +38,11 @@ public:
         user->removeList(answer);
     }
 
+    void buyAnObject(string &objectName, string &listName) const {
+        int foo = user->buySomething(objectName, listName);
+    }
+
+
     User *user;
 };
 
