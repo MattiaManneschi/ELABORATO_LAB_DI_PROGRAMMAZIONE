@@ -46,6 +46,13 @@ TEST(User, WorkingUser) {
         SUCCEED();
     }
 
+    try {
+        user.deselectPurchase((string &) "FOO", (string &) "FOO_3");
+    }
+    catch (invalid_argument &err) {
+        SUCCEED();
+    }
+
 
     shoppingList.addObject(firstArticle);
 
