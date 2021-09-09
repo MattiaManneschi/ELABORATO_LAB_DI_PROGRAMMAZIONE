@@ -8,6 +8,7 @@ TEST(ShoppingList, WorkingShoppingList) {
     ShoppingList shoppingList;
     ASSERT_FALSE(shoppingList.isShareable());
     ASSERT_EQ(0, shoppingList.getNumOfObjects());
+    EXPECT_EQ(0, shoppingList.getNumToBuy());
 
     try {
         shoppingList.removeObject((string &) "OGGETTO");
@@ -23,7 +24,11 @@ TEST(ShoppingList, WorkingShoppingList) {
 
     EXPECT_EQ(1, shoppingList.addObject(firstArticle));
 
+    EXPECT_EQ(1, shoppingList.getNumToBuy());
+
     EXPECT_EQ(true, shoppingList.searchToPurchase(firstArticle.objectName));
+
+    EXPECT_EQ(0, shoppingList.getNumToBuy());
 
     EXPECT_EQ(0, shoppingList.removeObject(firstArticle.objectName));
 

@@ -68,6 +68,8 @@ TEST(User, WorkingUser) {
     user.removeList(const_cast<string &>(shoppingList.getListName()));
     EXPECT_EQ(false, user.isListStatus());
 
+    EXPECT_EQ(1, user.getQuantity((string &) "LISTA", (string &) "MANICO"));
+
 }
 
 
