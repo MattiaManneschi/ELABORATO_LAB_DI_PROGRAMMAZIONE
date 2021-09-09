@@ -56,10 +56,8 @@ TEST(User, WorkingUser) {
 
     shoppingList.addObject(firstArticle);
 
-
     user.searchListAdd(const_cast<string &>(shoppingList.getListName()), firstArticle);
     EXPECT_EQ(true, user.isObjectStatus());
-
 
     user.searchListRemove(const_cast<string &>(shoppingList.getListName()), (string &) firstArticle.objectName);
     EXPECT_EQ(false, user.isObjectStatus());
@@ -68,7 +66,7 @@ TEST(User, WorkingUser) {
     user.removeList(const_cast<string &>(shoppingList.getListName()));
     EXPECT_EQ(false, user.isListStatus());
 
-    EXPECT_EQ(1, user.getQuantity((string &) "LISTA", (string &) "MANICO"));
+    EXPECT_EQ(0, user.getQuantity((string &) "LISTA", (string &) "MANICO"));
 
 }
 
