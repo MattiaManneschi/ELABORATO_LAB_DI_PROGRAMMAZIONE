@@ -32,13 +32,13 @@ public:
         notify(s.getListName());
     }
 
-    void removeList(string &listName);
+    void removeList(const string &listName);
 
-    int getQuantity(string &listName, string &objectName);
+    int getQuantity(const string &listName, const string &objectName);
 
-    void searchListAdd(string &listName, const articolo &a);
+    void searchListAdd(const string &listName, const articolo &a);
 
-    void searchListRemove(string &listName, string &objectName);
+    void searchListRemove(const string &listName, const string &objectName);
 
     void addSharedList(const User &u);
 
@@ -56,9 +56,9 @@ public:
         }
     }
 
-    int buySomething(string &objectName, string &listName);
+    int buySomething(const string &objectName, const string &listName);
 
-    int deselectPurchase(string &objectName, string &listName);
+    int deselectPurchase(const string &objectName, const string &listName);
 
     int getListNum() const;
 

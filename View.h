@@ -18,11 +18,11 @@ public:
         this->userAdded = true;
     };
 
-    void createNewArticle(string answer1, string answer, int qty) {
+    void createNewArticle(const string &answer1, const string &answer, int qty) {
         controller->createArticle(answer, qty, answer1);
     }
 
-    void deleteOldArticle(string answer1, string answer) {
+    void deleteOldArticle(const string &answer1, const string &answer) {
         controller->removeOldArticle(answer1, answer);
     }
 

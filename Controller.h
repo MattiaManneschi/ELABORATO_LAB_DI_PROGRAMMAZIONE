@@ -13,36 +13,36 @@ class Controller {
 public:
     explicit Controller(User *u) : user(u) {};
 
-    void createArticle(string &a, int b, string &c) const {
+    void createArticle(const string &a, int b, const string &c) const {
         articolo articolo1;
         articolo1.objectName = a;
         articolo1.qty = b;
         this->addNewArticle(articolo1, c);
     }
 
-    void addNewArticle(const articolo &a, string &c) const {
-       user->searchListAdd(c, a);
+    void addNewArticle(const articolo &a, const string &c) const {
+        user->searchListAdd(c, a);
     }
 
-    void removeOldArticle(string &listName, string &articleName) const {
+    void removeOldArticle(const string &listName, const string &articleName) const {
         user->searchListRemove(listName, articleName);
     }
 
-    void createNewList(string &answer) const {
+    void createNewList(const string &answer) const {
         ShoppingList shoppingList;
         shoppingList.setListName(answer);
         user->addList(shoppingList);
     }
 
-    void removeList(string &answer) const {
+    void removeList(const string &answer) const {
         user->removeList(answer);
     }
 
-    void buyAnObject(string &objectName, string &listName) const {
+    void buyAnObject(const string &objectName, const string &listName) const {
         int foo = user->buySomething(objectName, listName);
     }
 
-    void deselectObjectToBuy(string &objectName, string &listName) const {
+    void deselectObjectToBuy(const string &objectName, const string &listName) const {
         int foo = user->deselectPurchase(objectName, listName);
     }
 

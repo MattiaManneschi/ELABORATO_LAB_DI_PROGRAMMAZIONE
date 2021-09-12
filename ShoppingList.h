@@ -25,7 +25,7 @@ public:
 
     int addObject(const articolo &c);
 
-    int removeObject(string &objectName);
+    int removeObject(const string &objectName);
 
     bool isShareable() const;
 
@@ -33,15 +33,15 @@ public:
         this->shareable = true;
     }
 
-    int checkName(string &objectName);
+    int checkName(const string &objectName);
 
     int getNumOfObjects() const {
         return shoppingList.size();
     }
 
-    bool searchToPurchase(string &objectName);
+    bool searchToPurchase(const string &objectName);
 
-    bool searchToDeselect(string &objectName);
+    bool searchToDeselect(const string &objectName);
 
     unsigned long getNumToBuy() const;
 

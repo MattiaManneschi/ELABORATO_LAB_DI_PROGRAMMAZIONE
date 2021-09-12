@@ -32,7 +32,7 @@ int ShoppingList::addObject(const articolo &c) {
     return shoppingList.size();
 }
 
-int ShoppingList::removeObject(string &objectName) {
+int ShoppingList::removeObject(const string &objectName) {
     if (shoppingList.empty()) {
         throw invalid_argument("LISTA VUOTA");
     } else {
@@ -56,7 +56,7 @@ int ShoppingList::removeObject(string &objectName) {
     }
 }
 
-int ShoppingList::checkName(string &objectName) {
+int ShoppingList::checkName(const string &objectName) {
     auto it = shoppingList.begin();
     while (it != shoppingList.end()) {
         if (it->objectName == objectName) {
@@ -68,7 +68,7 @@ int ShoppingList::checkName(string &objectName) {
 }
 
 
-bool ShoppingList::searchToPurchase(string &objectName) {
+bool ShoppingList::searchToPurchase(const string &objectName) {
     auto it = shoppingList.begin();
     while (it != shoppingList.end()) {
         if (it->objectName == objectName) {
@@ -82,7 +82,7 @@ bool ShoppingList::searchToPurchase(string &objectName) {
     return false;
 }
 
-bool ShoppingList::searchToDeselect(string &objectName) {
+bool ShoppingList::searchToDeselect(const string &objectName) {
     auto it = shoppingList.begin();
     while (it != shoppingList.end()) {
         if (it->objectName == objectName) {

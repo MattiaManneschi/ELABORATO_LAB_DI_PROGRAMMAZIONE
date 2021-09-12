@@ -28,7 +28,7 @@ bool User::isListStatus() const {
     return listStatus;
 }
 
-void User::removeList(string &listName) {
+void User::removeList(const string &listName) {
     auto it = shoppingLists.begin();
     while (it != shoppingLists.end()) {
         if (it->getListName() == listName) {
@@ -42,7 +42,7 @@ void User::removeList(string &listName) {
     }
 }
 
-int User::getQuantity(string &listName, string &objectName) {
+int User::getQuantity(const string &listName, const string &objectName) {
     auto it = shoppingLists.begin();
     while (it != shoppingLists.end()) {
         if (it->getListName() == listName) {
@@ -53,7 +53,7 @@ int User::getQuantity(string &listName, string &objectName) {
 }
 
 
-void User::searchListAdd(string &listName, const articolo &a) {
+void User::searchListAdd(const string &listName, const articolo &a) {
     auto it = shoppingLists.begin();
     while (it != shoppingLists.end()) {
         if (it->getListName() == listName) {
@@ -71,7 +71,7 @@ void User::searchListAdd(string &listName, const articolo &a) {
     notify(a.objectName);
 }
 
-void User::searchListRemove(string &listName, string &objectName) {
+void User::searchListRemove(const string &listName, const string &objectName) {
     auto it = shoppingLists.begin();
     while (it != shoppingLists.end()) {
         if (it->getListName() == listName) {
@@ -99,7 +99,7 @@ void User::addSharedList(const User &u) {
     }
 }
 
-int User::buySomething(string &objectName, string &listName) {
+int User::buySomething(const string &objectName, const string &listName) {
     auto it = shoppingLists.begin();
     while (it != shoppingLists.end()) {
         if (it->getListName() == listName) {
@@ -116,7 +116,7 @@ int User::buySomething(string &objectName, string &listName) {
     return 1;
 }
 
-int User::deselectPurchase(string &objectName, string &listName) {
+int User::deselectPurchase(const string &objectName, const string &listName) {
     auto it = shoppingLists.begin();
     while (it != shoppingLists.end()) {
         if (it->getListName() == listName) {
